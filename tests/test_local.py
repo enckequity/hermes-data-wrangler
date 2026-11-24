@@ -166,6 +166,7 @@ def main():
             print("\nAPPROVAL-GATED WRITE:", approval_write)
             assert "error" in approval_write
             assert "approval" in approval_write["error"]
+            assert "Hermes" not in approval_write["error"], "refusals must not name the host"
             assert not approval_out.exists(), "approval guard must refuse before creating the file"
             assert not (Path(tmp) / ".ssh").exists(), "approval guard must refuse before mkdir"
 
@@ -180,6 +181,7 @@ def main():
             print("\nAPPROVAL-GATED OVERWRITE:", approval_overwrite)
             assert "error" in approval_overwrite
             assert "approval" in approval_overwrite["error"]
+            assert "Hermes" not in approval_overwrite["error"], "refusals must not name the host"
             assert existing_config.read_text(encoding="utf-8") == "Host example\n  User sentinel\n", \
                 "approval guard must not modify an existing approval-gated file"
 

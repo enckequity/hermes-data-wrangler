@@ -483,10 +483,10 @@ def table_clean(args: dict, **kwargs) -> str:
                 return json.dumps(
                     {
                         "error": (
-                            "Write refused: the loaded agent.file_safety has no "
-                            "is_write_approval_required (added in Hermes v0.22; "
-                            "this plugin requires >=0.22), so approval-gated "
-                            "write targets cannot be checked. Failing closed: "
+                            "Write refused: this assistant's file-safety check "
+                            "cannot tell which paths need approval, so "
+                            "approval-gated write targets cannot be checked. "
+                            "Failing closed: "
                             f"nothing was written to '{resolved_out}'."
                         )
                     }
@@ -496,8 +496,8 @@ def table_clean(args: dict, **kwargs) -> str:
                     {
                         "error": (
                             f"Write refused: '{resolved_out}' is an approval-gated "
-                            "path in Hermes (writes there require explicit user "
-                            "approval). table_clean cannot prompt for approval, "
+                            "path in this workspace (writes there require explicit "
+                            "user approval). table_clean cannot prompt for approval, "
                             "so it fails closed and nothing was written. Choose "
                             "a different output path."
                         )
